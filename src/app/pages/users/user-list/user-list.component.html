@@ -1,0 +1,38 @@
+<app-title title="Users list"  />
+
+
+<div class="overflow-x-auto">
+    <table class="min-w-full bg-white border border-gray-200">
+      <thead>
+        <tr class="bg-blue-500 border-b border-gray-200">
+          <th class="text-left py-2 px-4 font-semibold text-gray-300">#Num</th>
+          <th class="text-left py-2 px-4 font-semibold text-gray-300">Nombre Completo</th>
+          <th class="text-left py-2 px-4 font-semibold text-gray-300">Age</th>
+          <th class="text-left py-2 px-4 font-semibold text-gray-300">Direccion</th>
+          <th class="text-left py-2 px-4 font-semibold text-gray-300">Opciones</th>
+
+        </tr>
+      </thead>
+      <tbody>
+
+        @for (user of UserService.users(); track user.id) {
+            <tr  class="border-b hover:bg-gray-50">
+            <td class="py-2 px-4">{{ user.id }}</td>
+            <td class="py-2 px-4">{{ user.firstname }} {{ user.lastname }}</td>
+            <td class="py-2 px-4">{{ user.age }}</td>
+            <td class="py-2 px-4">{{ user.address }}</td>
+            <td class="py-2 px-4">
+                <a 
+                [routerLink]="['/user-control/edit/', user.id ]" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded ">Update</a> 
+                  
+                  <button (click)="deleteUser(user.id)" class="bg-red-500 hover:red-blue-600 text-white font-bold py-2 px-4 rounded ml-3" >
+                    Eliminar
+                  </button>
+            </td>
+            </tr>
+        }@empty {
+          <p>No se encontraron usuarios en la lista : agreggue uusarios a la lista</p>
+        }
+      </tbody>
+    </table>
+  </div>
